@@ -38,7 +38,7 @@ $.tablesorter.addWidget({
 				var myFilterColumn = $('#filter-select-for-'+$(table).attr('id')+'-column-'+i);
 				if (myFilterColumn.length>0){
 					$(f).attr('passFilter',false);
-					if ($(f).text().toLowerCase().indexOf(myFilterColumn.val().toLowerCase()) != -1) $(f).attr('passFilter',true);
+					if ($(f).text().toLowerCase().indexOf(myFilterColumn.val().toLowerCase()) == 0) $(f).attr('passFilter',true);
 				}
 			});
 			if ($('td',$(r)).length==$('td[passFilter="true"]',$(r)).length){
