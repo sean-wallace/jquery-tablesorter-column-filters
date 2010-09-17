@@ -5,11 +5,11 @@ $.tablesorter.addWidget({
 		var table = $(element);
 		var table_id = table.attr('id');
 		if (table_id==false){ table_id = 'jFTable-'+Math.round(Math.random()*10000); table.attr('id',table_id);}
-		if ($('#filters-for-'+table_id).length==0 && $('th[colfilter="1"]').length>0){
+		if ($('#filters-for-'+table_id).length==0 && $('th[class~="colfilter"]').length>0){
 			$('thead tr',table).after('<tr id="filters-for-'+table_id+'"></tr>');
 			$('th',table).each(function(n,e){
 				$('#filters-for-'+table_id).append('<th id="filter-column-'+table_id+'-'+n+'"></th>');
-				if ($(e).attr('colfilter')==1){
+				if ($(e).attr('class').indexOf('colfilter')!=-1){
 					$('#filter-column-'+table_id+'-'+n).append('<select rel="colfilter" id="filter-select-for-'+table_id+'-column-'+n+'"></select>');
 					var options = ['<option value="">All...</option>'];
 					var optionsAdded = [];
