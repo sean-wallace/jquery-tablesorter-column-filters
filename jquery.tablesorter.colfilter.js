@@ -1,16 +1,16 @@
 $.tablesorter.addWidget({
-	id: 'jFilterSelect',
+	id: 'colfilter',
 	format: function(element){
-		var __jFilter = this;
+		var __colfilter = this;
 		var table = $(element);
 		var table_id = table.attr('id');
 		if (table_id==false){ table_id = 'jFTable-'+Math.round(Math.random()*10000); table.attr('id',table_id);}
-		if ($('#filters-for-'+table_id).length==0 && $('th[jFilterSelect="1"]').length>0){
+		if ($('#filters-for-'+table_id).length==0 && $('th[colfilter="1"]').length>0){
 			$('thead tr',table).after('<tr id="filters-for-'+table_id+'"></tr>');
 			$('th',table).each(function(n,e){
 				$('#filters-for-'+table_id).append('<th id="filter-column-'+table_id+'-'+n+'"></th>');
-				if ($(e).attr('jFilterSelect')==1){
-					$('#filter-column-'+table_id+'-'+n).append('<select rel="jFilterSelect" id="filter-select-for-'+table_id+'-column-'+n+'"></select>');
+				if ($(e).attr('colfilter')==1){
+					$('#filter-column-'+table_id+'-'+n).append('<select rel="colfilter" id="filter-select-for-'+table_id+'-column-'+n+'"></select>');
 					var options = ['<option value="">All...</option>'];
 					var optionsAdded = [];
 					$('td:nth-child('+(n+1)+')',table).each(function(o,itm){
@@ -22,13 +22,13 @@ $.tablesorter.addWidget({
 					});
 					$('#filter-select-for-'+table_id+'-column-'+n).html(options.join('')).bind('change',function(ev){
 						ev.preventDefault();
-						__jFilter.jFilterRun(element);
+						__colfilter.colfilterRun(element);
 					});
 				}
 			});
 		}
 	},
-	jFilterRun: function(table){
+	colfilterRun: function(table){
 		$('tbody tr:hidden', table).show();
 		$('tbody tr',$(table)).each(function(n,r){
 			$('td',$(r)).each(function(i,f){
