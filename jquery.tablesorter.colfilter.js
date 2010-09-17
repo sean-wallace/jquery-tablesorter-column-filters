@@ -11,7 +11,7 @@ $.tablesorter.addWidget({
 				$('#filters-for-'+table_id).append('<th id="filter-column-'+table_id+'-'+n+'"></th>');
 				if ($(e).attr('class').indexOf('colfilter')!=-1){
 					$('#filter-column-'+table_id+'-'+n).append('<select rel="colfilter" id="filter-select-for-'+table_id+'-column-'+n+'"></select>');
-					var options = ['<option value="">All...</option>'];
+					var options = [];
 					var optionsAdded = [];
 					$('td:nth-child('+(n+1)+')',table).each(function(o,itm){
 						var tItm = $(itm).text();
@@ -20,6 +20,8 @@ $.tablesorter.addWidget({
 							optionsAdded[optionsAdded.length] = tItm;
 						}
 					});
+					options.sort();
+					options.unshift('<option value="">All...</option>');
 					$('#filter-select-for-'+table_id+'-column-'+n).html(options.join('')).bind('change',function(ev){
 						ev.preventDefault();
 						__colfilter.colfilterRun(element);
